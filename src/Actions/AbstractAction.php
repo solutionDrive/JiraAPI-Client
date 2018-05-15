@@ -43,18 +43,18 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
-     * @param string[] $aArguments
+     * @param string[] $requiredFields
      */
-    public function __construct(array $aArguments)
+    public function __construct(array $requiredFields)
     {
-        if (isset($aArguments['require'])) {
+        if (!empty($requiredFields)) {
             switch ($this->sRequestType) {
                 case self::METHOD_POST:
-                    $this->aArguments['json'] = $aArguments['require'];
+                    $this->aArguments['json'] = $requiredFields;
                     break;
                 case self::METHOD_GET:
                     $this->sRequestUrl .= '?';
-                    foreach ($aArguments['require'] as $sClass => $aList) {
+                    foreach ($requiredFields as $sClass => $aList) {
                         $this->sRequestUrl .= $sClass . '=' . implode(',', $aList);
                     }
                     break;

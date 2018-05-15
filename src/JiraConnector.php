@@ -11,6 +11,20 @@ namespace solutionDrive\JiraApi;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;
 use solutionDrive\JiraApi\Actions\AbstractAction;
+use solutionDrive\JiraApi\Actions\AddWorklogAction;
+use solutionDrive\JiraApi\Actions\DoTransitionAction;
+use solutionDrive\JiraApi\Actions\FileUploadAction;
+use solutionDrive\JiraApi\Actions\GetAllJiraIssuesAction;
+use solutionDrive\JiraApi\Actions\GetAllProjectsAction;
+use solutionDrive\JiraApi\Actions\GetProjectAction;
+use solutionDrive\JiraApi\Actions\GetTicketInfoAction;
+use solutionDrive\JiraApi\Actions\GetTicketTransitionsAction;
+use solutionDrive\JiraApi\Actions\GetUserAction;
+use solutionDrive\JiraApi\Actions\GetVersionAction;
+use solutionDrive\JiraApi\Actions\RemoveAttachmentAction;
+use solutionDrive\JiraApi\Actions\SearchJiraTicketAction;
+use solutionDrive\JiraApi\Actions\SearchJiraTicketsAction;
+use solutionDrive\JiraApi\Actions\SetTicketFieldsAction;
 
 class JiraConnector
 {
@@ -25,162 +39,88 @@ class JiraConnector
         $this->oJiraApi = $oJiraApi;
     }
 
-    public function getActivityStream(): Response
+    public function getAllJiraIssues(string $projectKey): Response
     {
-        $oAction = $this->generateAction($this->sNamespace . 'GetActivityStreamAction');
-        return $this->executeAction($oAction);
-    }
-
-    /**
-     * @param string[] $aParameter
-     */
-    public function getAllJiraIssues(array $aParameter = []): Response
-    {
-        $oAction = $this->generateAction($this->sNamespace . 'GetAllJiraIssuesAction', $aParameter);
+        $oAction = new GetAllJiraIssuesAction($projectKey);
         return $this->executeAction($oAction);
     }
 
     public function getAllProjects(): Response
     {
-        $oAction = $this->generateAction($this->sNamespace . 'GetAllProjectsAction');
+        $oAction = new GetAllProjectsAction([]);
         return $this->executeAction($oAction);
     }
 
-    /**
-     * @param string[] $aParameter
-     */
-    public function getJiraIssueById(array $aParameter = []): Response
+    public function getJiraIssueById($ticketKey): Response
     {
-        $oAction = $this->generateAction($this->sNamespace . 'GetJiraIssueByIdAction', $aParameter);
+        $oAction = new SearchJiraTicketAction($ticketKey);
         return $this->executeAction($oAction);
     }
 
-    /**
-     * @param string[] $aParameter
-     */
-    public function getProject(array $aParameter = []): Response
+    public function getProject(string $projectKey): Response
     {
-        $oAction = $this->generateAction($this->sNamespace . 'GetProjectAction', $aParameter);
+        $oAction = new GetProjectAction($projectKey);
         return $this->executeAction($oAction);
     }
 
-    /**
-     * @param string[] $aParameter
-     */
-    public function fileUpload(array $aParameter = []): Response
+    public function fileUpload(string $ticketKey, array $files): Response
     {
-        $oAction = $this->generateAction($this->sNamespace . 'FileUploadAction', $aParameter);
+        $oAction = new FileUploadAction($ticketKey, $files);
         return $this->executeAction($oAction);
     }
 
-    /**
-     * @param string[] $aParameter
-     */
-    public function getTicketInfo(array $aParameter = []): Response
+    public function getTicketInfo($ticketKey, $requiredFields): Response
     {
-        $oAction = $this->generateAction($this->sNamespace . 'GetTicketInfoAction', $aParameter);
+        $oAction = new GetTicketInfoAction($ticketKey, $requiredFields);
         return $this->executeAction($oAction);
     }
 
-    /**
-     * @param string[] $aParameter
-     */
-    public function addWorklog(array $aParameter = []): Response
+    public function addWorklog($ticketKey, $worklog): Response
     {
-        $oAction = $this->generateAction($this->sNamespace . 'AddWorklogAction', $aParameter);
+        $oAction = new AddWorklogAction($ticketKey, $worklog);
         return $this->executeAction($oAction);
     }
 
-    /**
-     * @param string[] $aParameter
-     */
-    public function getTicketTransitions(array $aParameter = []): Response
+    public function getTicketTransitions(string $ticketKey): Response
     {
-        $oAction = $this->generateAction($this->sNamespace . 'GetTicketTransitionsAction', $aParameter);
+        $oAction = new GetTicketTransitionsAction($ticketKey);
         return $this->executeAction($oAction);
     }
 
-    /**
-     * @param string[] $aParameter
-     */
-    public function doTransition(array $aParameter = []): Response
+    public function doTransition(string $ticketKey, int $transitionId): Response
     {
-        $oAction = $this->generateAction($this->sNamespace . 'DoTransitionAction', $aParameter);
+        $oAction = new DoTransitionAction($ticketKey, $transitionId);
         return $this->executeAction($oAction);
     }
 
     public function getUser(): Response
     {
-        $oAction = $this->generateAction($this->sNamespace . 'GetUserAction');
+        $oAction = new GetUserAction([]);
         return $this->executeAction($oAction);
     }
 
-    public function removeAttachments(): Response
+    public function removeAttachments(string $attachmentId): Response
     {
-        $oAction = $this->generateAction($this->sNamespace . 'RemoveAttachmentsAction');
+        $oAction = new RemoveAttachmentAction($attachmentId);
         return $this->executeAction($oAction);
     }
 
-    /**
-     * @param string[] $aParameter
-     */
-    public function searchJiraTicket(array $aParameter = []): Response
+    public function searchJiraTickets(string $jql): Response
     {
-        $oAction = $this->generateAction($this->sNamespace . 'SearchJiraTicketAction', $aParameter);
+        $oAction = new SearchJiraTicketsAction($jql);
         return $this->executeAction($oAction);
     }
 
-    /**
-     * @param string[] $aParameter
-     */
-    public function searchJiraTickets(array $aParameter = []): Response
+
+    public function setTicketFields(string $ticketKey, array $ticketFields): Response
     {
-        $oAction = $this->generateAction($this->sNamespace . 'SearchJiraTicketsAction', $aParameter);
+        $oAction = new SetTicketFieldsAction($ticketKey, $ticketFields);
         return $this->executeAction($oAction);
     }
 
-    /**
-     * @param string[] $aParameter
-     */
-    public function setTicketFields(array $aParameter = []): Response
+    public function getVersion(string $version): Response
     {
-        $oAction = $this->generateAction($this->sNamespace . 'SetTicketFields', $aParameter);
-        return $this->executeAction($oAction);
-    }
-
-    /**
-     * @param string[] $aParameter
-     */
-    public function getBoards(array $aParameter = []): Response
-    {
-        $oAction = $this->generateAction($this->sNamespace . 'GetBoardsAction', $aParameter);
-        return $this->executeAction($oAction);
-    }
-
-    /**
-     * @param string[] $aParameter
-     */
-    public function getSprints(array $aParameter = []): Response
-    {
-        $oAction = $this->generateAction($this->sNamespace . 'GetSprintsAction', $aParameter);
-        return $this->executeAction($oAction);
-    }
-
-    /**
-     * @param string[] $aParameter
-     */
-    public function getSprintIssues(array $aParameter = []): Response
-    {
-        $oAction = $this->generateAction($this->sNamespace . 'GetSprintIssuesAction', $aParameter);
-        return $this->executeAction($oAction);
-    }
-
-    /**
-     * @param string[] $aParameter
-     */
-    public function getVersion(array $aParameter = []): Response
-    {
-        $oAction = $this->generateAction($this->sNamespace . 'GetVersionAction', $aParameter);
+        $oAction = new GetVersionAction($version);
         return $this->executeAction($oAction);
     }
 
@@ -192,13 +132,5 @@ class JiraConnector
             $oResponse = $oException->getResponse();
         }
         return $oResponse;
-    }
-
-    /**
-     * @param string[] $aParameter
-     */
-    protected function generateAction(string $action, array $aParameter = []): AbstractAction
-    {
-        return new $action($aParameter);
     }
 }

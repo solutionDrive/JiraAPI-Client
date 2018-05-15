@@ -28,12 +28,9 @@ class DoTransitionAction extends AbstractAction
         ],
     ];
 
-    /**
-     * @param string[] $sParameter
-     */
-    public function __construct(array $sParameter)
+    public function __construct(string $ticketKey, int $transitionId)
     {
-        $this->sRequestUrl .= $sParameter['ticketKey'] . '/transitions';
-        $this->aArguments['json']['transition']['id'] = $sParameter['transition'];
+        $this->sRequestUrl .= $ticketKey . '/transitions';
+        $this->aArguments['json']['transition']['id'] = $transitionId;
     }
 }

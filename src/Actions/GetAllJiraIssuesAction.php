@@ -31,11 +31,8 @@ class GetAllJiraIssuesAction extends AbstractAction
         ],
     ];
 
-    /**
-     * @param string[] $aParamteter
-     */
-    public function __construct(array $aParamteter = [])
+    public function __construct(string $projektKey)
     {
-        $this->aArguments['json']['jql'] = sprintf($this->aArguments['json']['jql'], $aParamteter['projectKey']);
+        $this->aArguments['json']['jql'] = sprintf($this->aArguments['json']['jql'], $projektKey);
     }
 }

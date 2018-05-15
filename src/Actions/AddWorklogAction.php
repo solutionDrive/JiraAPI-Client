@@ -19,9 +19,9 @@ class AddWorklogAction extends AbstractAction
     /**
      * @param string[] $aArguments
      */
-    public function __construct(array $aArguments)
+    public function __construct(string $ticketKey, string $worklog)
     {
-        $this->sRequestUrl = sprintf($this->sRequestUrl, $aArguments['ticketKey']);
-        $this->aArguments['json'] = $aArguments['worklog'];
+        $this->sRequestUrl = sprintf($this->sRequestUrl, $ticketKey);
+        $this->aArguments['json'] = $worklog;
     }
 }

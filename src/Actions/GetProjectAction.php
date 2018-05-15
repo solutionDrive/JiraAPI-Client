@@ -16,11 +16,8 @@ class GetProjectAction extends AbstractAction
     /** @var string */
     protected $sRequestUrl = 'project/%s';
 
-    /**
-     * @param string[] $aArguments
-     */
-    public function __construct(array $aArguments)
+    public function __construct(string $projectKey)
     {
-        $this->sRequestUrl = sprintf($this->sRequestUrl, $aArguments['project']);
+        $this->sRequestUrl = sprintf($this->sRequestUrl, $projectKey);
     }
 }

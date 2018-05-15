@@ -28,20 +28,8 @@ class SearchJiraTicketAction extends AbstractAction
         ],
     ];
 
-    /**
-     * @param string[] $aParameter
-     */
-    public function __construct(array $aParameter)
+    public function __construct(string $ticketKey)
     {
-        $this->sTicketKey = $aParameter['ticketKey'];
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getArguments(): array
-    {
-        $this->aArguments['json']['jql'] .= $this->sTicketKey . ' order by key asc';
-        return $this->aArguments;
+        $this->aArguments['json']['jql'] .= $ticketKey . ' order by key asc';
     }
 }

@@ -8,7 +8,7 @@
 
 namespace solutionDrive\JiraApi\Actions;
 
-class SetTicketFields extends AbstractAction
+class SetTicketFieldsAction extends AbstractAction
 {
     /** @var string */
     protected $sRequestType = self::METHOD_PUT;
@@ -25,10 +25,9 @@ class SetTicketFields extends AbstractAction
     /**
      * @param string[] $aTicketInformation
      */
-    public function __construct(array $aTicketInformation)
+    public function __construct(string $ticketKey, array $aTicketInformation)
     {
-        $this->sTicket = $aTicketInformation['ticketKey'];
-        unset($aTicketInformation['ticketKey']);
+        $this->sTicket = $ticketKey;
         $this->aTicketInformation = $aTicketInformation;
     }
 

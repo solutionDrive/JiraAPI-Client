@@ -16,11 +16,8 @@ class GetTicketTransitionsAction extends AbstractAction
     /** @var string */
     protected $sRequestUrl = 'issue/';
 
-    /**
-     * @param string[] $aParameter
-     */
-    public function __construct(array $aParameter)
+    public function __construct(string $ticketKey)
     {
-        $this->sRequestUrl .= $aParameter['ticketKey'] . '/transitions';
+        $this->sRequestUrl .= $ticketKey . '/transitions';
     }
 }

@@ -18,13 +18,9 @@ class SearchJiraTicketsAction extends AbstractAction
 
     /** @var string */
     protected $sRequestUrl = 'search';
-
-    /**
-     * @param string[] $aParameter
-     */
-    public function __construct(array $aParameter)
+    
+    public function __construct(string $jql)
     {
-        parent::__construct($aParameter);
-        $this->aArguments['json']['jql'] = $aParameter['jql'];
+        $this->aArguments['json']['jql'] = $jql;
     }
 }

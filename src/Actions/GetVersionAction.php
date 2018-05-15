@@ -16,11 +16,8 @@ class GetVersionAction extends AbstractAction
     /** @var string */
     protected $sRequestUrl = 'version/%s';
 
-    /**
-     * @param string[] $aArguments
-     */
-    public function __construct(array $aArguments)
+    public function __construct(string $version)
     {
-        $this->sRequestUrl = sprintf($this->sRequestUrl, $aArguments['version']);
+        $this->sRequestUrl = sprintf($this->sRequestUrl, $version);
     }
 }

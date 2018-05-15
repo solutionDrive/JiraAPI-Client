@@ -24,12 +24,12 @@ class FileUploadAction extends AbstractAction
     ];
 
     /**
-     * @param string[] $aArguments
+     * @param string[] $files
      */
-    public function __construct(array $aArguments)
+    public function __construct(string $ticketKey, array $files)
     {
-        $this->sRequestUrl = sprintf($this->sRequestUrl, $aArguments['ticketKey']);
-        foreach ($aArguments['files'] as $aFile) {
+        $this->sRequestUrl = sprintf($this->sRequestUrl, $ticketKey);
+        foreach ($files as $aFile) {
             $this->aArguments['multipart'][] =
                 [
                     'name'      => 'file',

@@ -17,11 +17,11 @@ class GetTicketInfoAction extends AbstractAction
     protected $sRequestUrl = 'issue/%s';
 
     /**
-     * @param string[] $aParameter
+     * @param string[] $requiredFields
      */
-    public function __construct(array $aParameter)
+    public function __construct(string $ticketKey, array $requiredFields)
     {
-        $this->sRequestUrl = sprintf($this->sRequestUrl, $aParameter['ticketKey']);
-        parent::__construct($aParameter);
+        $this->sRequestUrl = sprintf($this->sRequestUrl, $ticketKey);
+        parent::__construct($requiredFields);
     }
 }
