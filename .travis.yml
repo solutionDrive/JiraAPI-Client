@@ -1,0 +1,21 @@
+language: php
+
+dist: trusty
+
+sudo: false
+
+php:
+    - 7.1
+    - 7.2
+
+before_install:
+    - phpenv config-rm xdebug.ini
+    - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+
+install:
+    - composer install --no-interaction --prefer-dist
+
+script:
+    - composer validate --strict
+    - bin/ecs check src/
+    - bin/phpspec run
