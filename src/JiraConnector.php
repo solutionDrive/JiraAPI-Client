@@ -31,10 +31,7 @@ class JiraConnector
     /** @var null|JiraConnector */
     protected $oJiraApi = null;
 
-    /** @var string */
-    protected $sNamespace = __NAMESPACE__ . '\\Actions\\';
-
-    public function __construct(JiraConnector $oJiraApi)
+    public function __construct(JiraConnectorCore $oJiraApi)
     {
         $this->oJiraApi = $oJiraApi;
     }
