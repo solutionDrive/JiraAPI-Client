@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 /*
  * Created by solutionDrive GmbH
@@ -10,7 +11,6 @@ namespace solutionDrive\JiraApi;
 
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;
-use solutionDrive\JiraApi\Actions\AbstractAction;
 use solutionDrive\JiraApi\Actions\AddWorklogAction;
 use solutionDrive\JiraApi\Actions\DoTransitionAction;
 use solutionDrive\JiraApi\Actions\FileUploadAction;
@@ -48,7 +48,7 @@ class JiraConnector
         return $this->executeAction($oAction);
     }
 
-    public function getJiraIssueById($ticketKey): Response
+    public function getJiraIssueById(string $ticketKey): Response
     {
         $oAction = new SearchJiraTicketAction($ticketKey);
         return $this->executeAction($oAction);
@@ -60,19 +60,25 @@ class JiraConnector
         return $this->executeAction($oAction);
     }
 
+    /**
+     * @param string[][] $files
+     */
     public function fileUpload(string $ticketKey, array $files): Response
     {
         $oAction = new FileUploadAction($ticketKey, $files);
         return $this->executeAction($oAction);
     }
 
-    public function getTicketInfo($ticketKey, $requiredFields): Response
+    /**
+     * @param string[] $requiredFields
+     */
+    public function getTicketInfo(string $ticketKey, array $requiredFields): Response
     {
         $oAction = new GetTicketInfoAction($ticketKey, $requiredFields);
         return $this->executeAction($oAction);
     }
 
-    public function addWorklog($ticketKey, $worklog): Response
+    public function addWorklog(string $ticketKey, string $worklog): Response
     {
         $oAction = new AddWorklogAction($ticketKey, $worklog);
         return $this->executeAction($oAction);
@@ -108,7 +114,9 @@ class JiraConnector
         return $this->executeAction($oAction);
     }
 
-
+    /**
+     * @param string[] $ticketFields
+     */
     public function setTicketFields(string $ticketKey, array $ticketFields): Response
     {
         $oAction = new SetTicketFieldsAction($ticketKey, $ticketFields);

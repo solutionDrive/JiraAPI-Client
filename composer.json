@@ -1,4 +1,8 @@
 {
+    "name": "solutiondrive/jira-api-client",
+    "description": "An API for the communication with Atlassian JIRA",
+    "type": "library",
+    "license": "MIT",
     "require": {
         "guzzlehttp/guzzle": "^6.3",
         "solutiondrive/coding-standard": "^1.2",

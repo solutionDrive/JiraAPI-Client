@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 /*
  * Created by solutionDrive GmbH
@@ -16,11 +17,9 @@ class AddWorklogAction extends AbstractAction
     /** @var string */
     protected $sRequestUrl = 'issue/%s/worklog';
 
-    /**
-     * @param string[] $aArguments
-     */
     public function __construct(string $ticketKey, string $worklog)
     {
+        parent::__construct([]);
         $this->sRequestUrl = sprintf($this->sRequestUrl, $ticketKey);
         $this->aArguments['json'] = $worklog;
     }

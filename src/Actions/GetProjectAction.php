@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 /*
  * Created by solutionDrive GmbH
@@ -18,6 +19,7 @@ class GetProjectAction extends AbstractAction
 
     public function __construct(string $projectKey)
     {
+        parent::__construct([]);
         $this->sRequestUrl = sprintf($this->sRequestUrl, $projectKey);
     }
 }

@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 /*
  * Created by solutionDrive GmbH
@@ -30,6 +31,7 @@ class SearchJiraTicketAction extends AbstractAction
 
     public function __construct(string $ticketKey)
     {
+        parent::__construct([]);
         $this->aArguments['json']['jql'] .= $ticketKey . ' order by key asc';
     }
 }

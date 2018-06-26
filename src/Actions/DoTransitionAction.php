@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 /*
  * Created by solutionDrive GmbH
@@ -30,6 +31,7 @@ class DoTransitionAction extends AbstractAction
 
     public function __construct(string $ticketKey, int $transitionId)
     {
+        parent::__construct([]);
         $this->sRequestUrl .= $ticketKey . '/transitions';
         $this->aArguments['json']['transition']['id'] = $transitionId;
     }

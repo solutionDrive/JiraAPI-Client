@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 /*
  * Created by solutionDrive GmbH
@@ -33,6 +34,7 @@ class GetAllJiraIssuesAction extends AbstractAction
 
     public function __construct(string $projektKey)
     {
+        parent::__construct([]);
         $this->aArguments['json']['jql'] = sprintf($this->aArguments['json']['jql'], $projektKey);
     }
 }

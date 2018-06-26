@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 /*
  * Created by solutionDrive GmbH
@@ -21,11 +22,11 @@ abstract class AbstractAction implements ActionInterface
     /** @var string */
     protected $sRequestUrl = '';
 
-    /** @var string[] */
+    /** @var mixed[] */
     protected $aArguments = [];
 
     /**
-     * @return string[]
+     * @return string[][]
      */
     public function getArguments(): array
     {

@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 /*
  * Created by solutionDrive GmbH
@@ -27,6 +28,7 @@ class SetTicketFieldsAction extends AbstractAction
      */
     public function __construct(string $ticketKey, array $aTicketInformation)
     {
+        parent::__construct([]);
         $this->sTicket = $ticketKey;
         $this->aTicketInformation = $aTicketInformation;
     }

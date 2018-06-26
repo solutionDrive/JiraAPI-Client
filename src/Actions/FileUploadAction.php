@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 /*
  * Created by solutionDrive GmbH
@@ -28,6 +29,7 @@ class FileUploadAction extends AbstractAction
      */
     public function __construct(string $ticketKey, array $files)
     {
+        parent::__construct([]);
         $this->sRequestUrl = sprintf($this->sRequestUrl, $ticketKey);
         foreach ($files as $aFile) {
             $this->aArguments['multipart'][] =

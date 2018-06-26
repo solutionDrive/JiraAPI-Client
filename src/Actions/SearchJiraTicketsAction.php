@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 /*
  * Created by solutionDrive GmbH
@@ -18,9 +19,10 @@ class SearchJiraTicketsAction extends AbstractAction
 
     /** @var string */
     protected $sRequestUrl = 'search';
-    
+
     public function __construct(string $jql)
     {
+        parent::__construct([]);
         $this->aArguments['json']['jql'] = $jql;
     }
 }
